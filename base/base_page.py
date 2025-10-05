@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 
+
 class BasePage(metaclass=MetaLocator):
 
     def __init__(self, driver):
@@ -15,6 +16,6 @@ class BasePage(metaclass=MetaLocator):
         self.EC = EC
         self.faker = Faker()
 
-    def Open(self):
+    def open(self):
         with allure.step(f'Open {self._PAGE_URL} page'):
             self.driver.get(self._PAGE_URL)
