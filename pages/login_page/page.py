@@ -1,3 +1,5 @@
+import allure
+
 from base.base_page import BasePage
 from data.urls import Urls
 from selenium.webdriver.remote.webelement import WebElement
@@ -10,7 +12,7 @@ class LoginPage(BasePage):
     _PASSWORD_FIELD = "//input[@name='password']"
     _SUBMIT_BUTTON = "//button[@type='submit']"
 
-
+    @allure.step("Авторизация на сайте")
     def login(self, login, password):
         user_name: WebElement = self.wait.until(EC.element_to_be_clickable(self._USERNAME_FIELD))
         user_name.send_keys(login)

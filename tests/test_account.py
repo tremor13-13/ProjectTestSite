@@ -14,7 +14,6 @@ class TestAccount(BaseTest):
         self.dashboard_page.is_opened()
         self.dashboard_page.go_to_my_info_page()
         time.sleep(3)
-        self.personal_details_component.change_first_name("Alex")
-
-
-        time.sleep(3)
+        self.myinfopage.personal_details.change_first_name("Aristarh")
+        self.myinfopage.personal_details.save_change()
+        time.sleep(5)
