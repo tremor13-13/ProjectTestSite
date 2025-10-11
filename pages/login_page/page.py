@@ -20,3 +20,9 @@ class LoginPage(BasePage):
         user_password.send_keys(password)
         submit_button: WebElement = self.wait.until(EC.element_to_be_clickable(self._SUBMIT_BUTTON))
         submit_button.click()
+        allure.attach(
+            self.driver.get_screenshot_as_png(),
+            name="Login user",
+            attachment_type=allure.attachment_type.PNG
+        )
+

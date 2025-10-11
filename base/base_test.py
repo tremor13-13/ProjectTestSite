@@ -3,7 +3,7 @@ from pages.login_page.page import LoginPage
 from pages.dashboard_page.page import DashboardPage
 from pages.my_info_page.page import MyInfoPage
 from pages.my_info_page.components.personal_details import PersonalDetailsComponent
-
+from pages.my_info_page.components.contact_deteils import ContactDetails
 
 class BaseTest:
 
@@ -13,4 +13,5 @@ class BaseTest:
         self.dashboard_page = DashboardPage(self.driver)
         self.myinfopage = MyInfoPage(self.driver)
         self.personal_details_component = PersonalDetailsComponent(self.driver)
+        self.contact_details_component = ContactDetails(self.driver)
 
