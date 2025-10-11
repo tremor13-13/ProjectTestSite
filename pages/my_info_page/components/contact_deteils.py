@@ -1,3 +1,5 @@
+import time
+
 import allure
 
 from base.base_page import BasePage
@@ -22,6 +24,7 @@ class ContactDetails(BasePage):
         adress_add.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
         adress_add.send_keys(adress)
         assert current_value != adress_add.get_attribute("value"), "Adress was not changed"
+        time.sleep(4)
         allure.attach(
             self.driver.get_screenshot_as_png(),
             name="Contact deteals add adress",

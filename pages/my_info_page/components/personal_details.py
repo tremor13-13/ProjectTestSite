@@ -1,3 +1,5 @@
+import time
+
 import allure
 
 from base.base_page import BasePage
@@ -28,6 +30,7 @@ class PersonalDetailsComponent(BasePage):
         middle_name_field = self.wait.until(EC.element_to_be_clickable(self._MIDDLE_NAME_FIELD))
         middle_name_field.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
         middle_name_field.send_keys(middle_name)
+        time.sleep(4)
 
 
     @allure.step("Сохраняемся")
