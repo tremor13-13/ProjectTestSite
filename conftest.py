@@ -2,7 +2,7 @@ import os
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import tempfile
+import uuid
 
 
 @pytest.fixture(autouse=True)
@@ -19,21 +19,23 @@ def driver(request):
         "credentials_enable_service": False,
     })
 
-    # Проверяем окружение
-    if os.getenv('DOCKER_RUN'):  # или Github
-        # НАСТРОЙКИ для DOCKER
-        print("Running in DOCKER mode")
+    # Используем встроенную переменную GitHub Actions
+    if os.getenv('GITHUB_ACTIONS'):
+        print("🚀 Running in GitHub Actions CI mode")
+        # НАСТРОЙКИ для CI
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--headless=new")
-        temp_dir = tempfile.mkdtemp()
+
+        # УНИКАЛЬНЫЙ user-data-dir
+        temp_dir = f"/tmp/chrome_{uuid.uuid4().hex[:8]}"
         chrome_options.add_argument(f"--user-data-dir={temp_dir}")
+
     else:
+        print("💻 Running in LOCAL/WINDOWS mode")
         # НАСТРОЙКИ для WINDOWS
-        print("Running in WINDOWS mode")
         chrome_options.add_argument("--incognito")
         chrome_options.add_argument("--disable-notifications")
-        # Убрать лишние аргументы которые мешают в Windows
 
     driver = webdriver.Chrome(options=chrome_options)
     request.cls.driver = driver
