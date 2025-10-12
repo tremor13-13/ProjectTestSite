@@ -1,8 +1,6 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import tempfile
-import uuid
 
 
 @pytest.fixture(autouse=True)
@@ -16,14 +14,11 @@ def driver(request):
         "profile.password_manager_enabled": False
     })
 
-    # Docker настройки
+    # ТОЛЬКО минимальные Docker настройки
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--headless=new")
 
-    # УНИКАЛЬНАЯ папка для каждого теста
-    temp_dir = f"/tmp/chrome_{uuid.uuid4().hex[:8]}"
-    chrome_options.add_argument(f"--user-data-dir={temp_dir}")
 
     driver = webdriver.Chrome(options=chrome_options)
     request.cls.driver = driver
