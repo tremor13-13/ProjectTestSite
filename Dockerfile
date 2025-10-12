@@ -10,17 +10,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем ChromeDriver
-RUN wget -q -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/141.0.7390.76/linux64/chromedriver-linux64.zip" && \
+RUN wget -q -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.185/linux64/chromedriver-linux64.zip" && \
     unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
     mv /usr/local/bin/chromedriver-linux64/chromedriver /usr/local/bin/ && \
     chmod +x /usr/local/bin/chromedriver && \
-    rm -rf /tmp/chromedriver.zip \
-
-#RUN wget -q -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.185/linux64/chromedriver-linux64.zip" && \
-#    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
-#    mv /usr/local/bin/chromedriver-linux64/chromedriver /usr/local/bin/ && \
-#    chmod +x /usr/local/bin/chromedriver && \
-#    rm -rf /tmp/chromedriver.zip
+    rm -rf /tmp/chromedriver.zip
 
 WORKDIR /app
 
