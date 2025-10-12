@@ -13,3 +13,6 @@ git remote add origin git@github.com:tremor13-13/ProjectTestSite.git
 git branch -M main
 git push -u origin main
 
+активация венв :)           
+.\.venv\Scripts\activate 
+

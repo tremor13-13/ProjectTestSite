@@ -19,6 +19,7 @@ class BasePage(metaclass=MetaLocator):
     def open(self):
         with allure.step(f'Open {self._PAGE_URL} page'):
             self.driver.get(self._PAGE_URL)
+
     @allure.step("Проверка то что мы на той странице что надо")
     def is_opened(self):
         self.wait.until(EC.url_to_be(self._PAGE_URL))
