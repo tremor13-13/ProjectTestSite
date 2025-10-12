@@ -23,6 +23,7 @@ jobs:
     - name: 🧪 Run tests
       run: |
         docker run \
+          --network=host \
           -e LOGIN="${{ secrets.LOGIN }}" \
           -e PASSWORD="${{ secrets.PASSWORD }}" \
           -v $(pwd)/allure-results:/app/allure-results \
