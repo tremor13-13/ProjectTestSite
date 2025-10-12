@@ -2,27 +2,27 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import tempfile
+import uuid
 
 
 @pytest.fixture(autouse=True)
 def driver(request):
-    chrome_options = webdriver.ChromeOptions()
+    chrome_options = Options()
 
-    chrome_options.add_experimental_option("excludeSwitches",
-                                           ["enable-automation", "enable-logging", "ignore-certificate-errors"])
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
     chrome_options.add_experimental_option("prefs", {
-        "profile.default_content_setting_values.notifications": 2,
-        "profile.password_manager_enabled": False,
         "credentials_enable_service": False,
+        "profile.password_manager_enabled": False
     })
 
-    # ТОЛЬКО Docker настройки
+    # Docker настройки
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--headless=new")
 
-    temp_dir = tempfile.mkdtemp()
+    # УНИКАЛЬНАЯ папка для каждого теста
+    temp_dir = f"/tmp/chrome_{uuid.uuid4().hex[:8]}"
     chrome_options.add_argument(f"--user-data-dir={temp_dir}")
 
     driver = webdriver.Chrome(options=chrome_options)
