@@ -7,10 +7,17 @@ import tempfile
 # это тоже для докера что бы тесты запускались в отдельных папках
 
 
-@pytest.fixture(autouse=True) # для запуска на компе нужно с автоюзом
-# @pytest.fixture() # убераю автоюз для докера
+@pytest.fixture(autouse=True)
 def driver(request):
     chrome_options = webdriver.ChromeOptions()
+
+    # === ДОБАВЛЕНО ДЛЯ HEADLESS ===
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    chrome_options.add_experimental_option('useAutomationExtension', False)
+    chrome_options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    chrome_options.add_argument("--window-size=1920,1080")
+    # === КОНЕЦ ДОБАВЛЕНИЯ ===
 
     # ВСЕ возможные настройки для блокировки
     chrome_options.add_experimental_option("excludeSwitches",
@@ -48,30 +55,6 @@ def driver(request):
     request.cls.driver = driver
     yield driver
     driver.quit()
-
-
-
-# import pytest
-# from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
-#
-#
-# @pytest.fixture(autouse=True)
-# def driver(request):
-#
-#     chrome_options = Options()
-#     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
-#
-#     # Отключаем сохранение паролей
-#     chrome_options.add_experimental_option("prefs", {
-#         "credentials_enable_service": False,
-#         "profile.password_manager_enabled": False
-#     })
-#
-#     driver = webdriver.Chrome(options=chrome_options)
-#     request.cls.driver = driver
-#     yield driver
-#     driver.quit()
 #
 
 # import pytest
