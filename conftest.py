@@ -1,48 +1,19 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import tempfile
 
 
 @pytest.fixture(autouse=True)
 def driver(request):
-    chrome_options = webdriver.ChromeOptions()
+    print("🚀 STARTING CHROME WITH SELENIUM MANAGER...")
 
-    chrome_options.add_experimental_option("excludeSwitches",
-                                           ["enable-automation", "enable-logging", "ignore-certificate-errors"])
-
-    chrome_options.add_experimental_option("prefs", {
-        "profile.default_content_setting_values.notifications": 2,
-        "profile.password_manager_enabled": False,
-        "credentials_enable_service": False,
-        "autofill.profile_enabled": False,
-        "autofill.credit_card_enabled": False,
-        "password_manager_enabled": False,
-        "enable-autofill": False,
-        "signin": False,
-        "translate": False
-    })
-
-    # УБРАТЬ для Docker:
-    # chrome_options.add_argument("--incognito")
-
-    chrome_options.add_argument("--disable-notifications")
-    chrome_options.add_argument("--disable-save-password-bubble")
-    chrome_options.add_argument("--disable-autofill-keyboard-accessory-view")
-    chrome_options.add_argument("--disable-features=PasswordSave,AutofillServerCommunication,TranslateUI")
-    chrome_options.add_argument("--disable-password-manager-reauthentication")
-    chrome_options.add_argument("--disable-password-manager")
-    chrome_options.add_argument("--disable-signin-promo")
-
-    temp_dir = tempfile.mkdtemp()
-    chrome_options.add_argument(f"--user-data-dir={temp_dir}")
-
-    # Docker настройки:
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options = Options()
     chrome_options.add_argument("--headless=new")
 
+    # ДАЙ SELENIUM САМОМУ РАЗОБРАТЬСЯ С ДРАЙВЕРОМ
     driver = webdriver.Chrome(options=chrome_options)
+
+    print("✅ CHROME STARTED!")
     request.cls.driver = driver
     yield driver
     driver.quit()
