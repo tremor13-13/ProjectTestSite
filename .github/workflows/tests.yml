@@ -21,7 +21,12 @@ jobs:
       timeout-minutes: 8
 
     - name: 🧪 Run tests
-      run: docker run -v $(pwd)/allure-results:/app/allure-results my-autotests
+      run: |
+        docker run \
+          -e LOGIN="${{ secrets.LOGIN }}" \
+          -e PASSWORD="${{ secrets.PASSWORD }}" \
+          -v $(pwd)/allure-results:/app/allure-results \
+          my-autotests
       timeout-minutes: 5
 
     - name: 📦 Install Allure
