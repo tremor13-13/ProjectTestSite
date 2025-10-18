@@ -30,32 +30,32 @@ class TestAccount(BaseTest):
         self.myinfopage.contact_details.save_contact_details()
         time.sleep(5)
 
-    # # ЕДИНЫЙ тест для проверки ОБОИХ полей одновременно
-    # @pytest.mark.parametrize("test_data", CombinedTestCases.get_all_cases(),
-    #                          ids=lambda x: f"{x.test_type}_{x.first_name[:5]}_{x.middle_name[:5]}")
-    # def test_combined_names_validation(self, test_data):
-    #     """
-    #     Тестируем ВЗАИМОДЕЙСТВИЕ полей First Name и Middle Name
-    #     """
-    #     # ПОДГОТОВКА - логинимся и переходим на страницу
-    #     self.login_page.open()
-    #     self.login_page.login(
-    #         login=self.credentials.LOGIN,
-    #         password=self.credentials.PASSWORD
-    #     )
-    #     self.dashboard_page.is_opened()
-    #     self.dashboard_page.go_to_my_info_page()
-    #     time.sleep(5)
-    #
-    #     # ДЕЙСТВИЕ - заполняем ОБА поля
-    #     with allure.step(f"Заполняем First: '{test_data.first_name}', Middle: '{test_data.middle_name}'"):
-    #         # Заполняем First Name
-    #         self.myinfopage.personal_details.change_first_last_name(test_data.first_name)
-    #         # Заполняем Middle Name
-    #         self.myinfopage.personal_details.change_middle_name(test_data.middle_name)
-    #         # Сохраняем
-    #         self.myinfopage.personal_details.save_change()
-    #         time.sleep(5)
+    # ЕДИНЫЙ тест для проверки ОБОИХ полей одновременно
+    @pytest.mark.parametrize("test_data", CombinedTestCases.get_all_cases(),
+                             ids=lambda x: f"{x.test_type}_{x.first_name[:5]}_{x.middle_name[:5]}")
+    def test_combined_names_validation(self, test_data):
+        """
+        Тестируем ВЗАИМОДЕЙСТВИЕ полей First Name и Middle Name
+        """
+        # ПОДГОТОВКА - логинимся и переходим на страницу
+        self.login_page.open()
+        self.login_page.login(
+            login=self.credentials.LOGIN,
+            password=self.credentials.PASSWORD
+        )
+        self.dashboard_page.is_opened()
+        self.dashboard_page.go_to_my_info_page()
+        time.sleep(5)
+
+        # ДЕЙСТВИЕ - заполняем ОБА поля
+        with allure.step(f"Заполняем First: '{test_data.first_name}', Middle: '{test_data.middle_name}'"):
+            # Заполняем First Name
+            self.myinfopage.personal_details.change_first_last_name(test_data.first_name)
+            # Заполняем Middle Name
+            self.myinfopage.personal_details.change_middle_name(test_data.middle_name)
+            # Сохраняем
+            self.myinfopage.personal_details.save_change()
+            time.sleep(5)
     #
     #     # ПРОВЕРКА
     #     if test_data.expected_result == "success":
