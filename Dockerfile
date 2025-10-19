@@ -32,7 +32,7 @@ CMD ["pytest", "-v", "--alluredir=allure-results"]
 
 
 #FROM python:3.11-slim-bullseye
-#
+## старая версия которая не  узнает какой хром загружен и вызывает ошибку загрузки вебдрайвера
 ## Устанавливаем утилиты и Chrome
 #RUN apt-get update && \
 #    apt-get install -y wget gnupg2 unzip && \

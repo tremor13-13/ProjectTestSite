@@ -1,6 +1,8 @@
 import time
 
 import allure
+import pytest
+from allure_commons import fixture
 from allure_commons.types import Severity
 
 from base.base_page import BasePage
@@ -14,6 +16,7 @@ class LoginPage(BasePage):
     _PASSWORD_FIELD = "//input[@name='password']"
     _SUBMIT_BUTTON = "//button[@type='submit']"
 
+    @pytest.mark.smoke
     @allure.step("Авторизация на сайте")
     def login(self, login, password):
         user_name = self.wait.until(EC.element_to_be_clickable(self._USERNAME_FIELD))
@@ -22,7 +25,7 @@ class LoginPage(BasePage):
         user_password.send_keys(password)
         submit_button = self.wait.until(EC.element_to_be_clickable(self._SUBMIT_BUTTON))
         submit_button.click()
-        time.sleep(5)
+        time.sleep(10)
         allure.attach(
             self.driver.get_screenshot_as_png(),
             name="Login user",

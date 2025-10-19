@@ -17,6 +17,7 @@ class TestAccount(BaseTest):
             login=self.credentials.LOGIN,
             password=self.credentials.PASSWORD
         )
+        self.login_page.take_screenshot()
         self.dashboard_page.is_opened()
         self.dashboard_page.go_to_my_info_page()
         time.sleep(3)

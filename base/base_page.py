@@ -27,3 +27,12 @@ class BasePage(metaclass=MetaLocator):
     def go_to_my_info_page(self):
         self.wait.until(EC.element_to_be_clickable(self._MY_INFO_ITEM)).click()
 
+    def take_screenshot(self, name):
+        """Делает скриншот и добавляет в Allure"""
+        allure.attach(
+            self.driver.get_screenshot_as_png(),
+            name=name,
+            attachment_type=allure.attachment_type.PNG
+        )
+        print(f"📸 Скриншот: {name}")
+
