@@ -36,3 +36,13 @@ class BasePage(metaclass=MetaLocator):
         )
         print(f"📸 Скриншот: {name}")
 
+    def wait_for_page_load(self, timeout=10):
+        # Ждем готовность DOM
+        WebDriverWait(self.driver, timeout).until(
+            lambda driver: driver.execute_script("return document.readyState") == "complete"
+        )
+
+        # Ждем исчезновение лоадеров
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(("class name", "oxd-form-loader"))
+        )

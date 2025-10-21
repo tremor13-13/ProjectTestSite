@@ -27,13 +27,14 @@ class ContactDetails(BasePage):
         adress_add.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
         adress_add.send_keys(adress)
         assert current_value != adress_add.get_attribute("value"), "Adress was not changed"
+
+    @allure.step("Сохраняем изменения")
+    def save_contact_details(self):
+        self.wait.until(EC.element_to_be_clickable(self._SUBMIT_BUTTON)).click()
+        self.wait_for_page_load()
         allure.attach(
             self.driver.get_screenshot_as_png(),
             name="Contact deteals add adress",
             attachment_type=allure.attachment_type.PNG
         )
-    @allure.step("Сохраняем изменения")
-    def save_contact_details(self):
-        self.wait.until(EC.element_to_be_clickable(self._SUBMIT_BUTTON)).click()
-        self.wait.until(EC.visibility_of_element_located(self._SUBMIT_BUTTON))
 
