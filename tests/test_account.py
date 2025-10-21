@@ -32,7 +32,7 @@ class TestAccount(BaseTest):
         self.myinfopage.contact_details.save_contact_details()
         time.sleep(5)
 
-    # ЕДИНЫЙ тест для проверки ОБОИХ полей одновременно"
+    # Параметризованные тесты (Тест дизайн + предугадывание ошибок)
     @pytest.mark.regression
     @pytest.mark.parametrize("test_data", CombinedTestCases.get_all_cases(),
                              ids=lambda x: f"{x.test_type}_{x.first_name[:5]}_{x.middle_name[:5]}")
@@ -59,17 +59,17 @@ class TestAccount(BaseTest):
             # Сохраняем
             self.myinfopage.personal_details.save_change()
             time.sleep(5)
-    #
-    #     # ПРОВЕРКА
-    #     if test_data.expected_result == "success":
-    #         # Если ожидаем успех - проверяем что нет ошибок
-    #         # Тут нужно добавить проверку что кнопка активна и поля не подсвечены красным
-    #         print("✓ Ожидался успех - проверяем что сохранение прошло")
-    #
-    #     else:  # expected_result == "error"
-    #         # Если ожидаем ошибку - проверяем что есть ошибка или кнопка неактивна
-    #         pytest.fail(
-    #             f"Ожидалась ошибка для комбинации: First='{test_data.first_name}', Middle='{test_data.middle_name}'")
+
+        # ПРОВЕРКА
+        if test_data.expected_result == "success":
+            # Если ожидаем успех - проверяем что нет ошибок
+            print("✓ Ожидался успех - проверяем что сохранение прошло")
+
+        else:  # expected_result == "error"
+            # Если ожидаем ошибку - проверяем что есть ошибка или кнопка неактивна
+            pytest.fail(
+                f"Ожидалась ошибка для комбинации: First='{test_data.first_name}', Middle='{test_data.middle_name}'")
+
    # # НОВЫЙ параметризованный тест - ДОБАВЛЯЕМ ЭТОТ МЕТОД
    #  @pytest.mark.parametrize("test_data", NameTestCases.get_all_cases(),
    #                           ids=lambda x: f"{x.test_type}_{x.name[:10]}")

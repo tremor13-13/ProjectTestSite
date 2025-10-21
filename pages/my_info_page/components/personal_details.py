@@ -33,9 +33,10 @@ class PersonalDetailsComponent(BasePage):
         time.sleep(4)
 
 
-    @allure.step("Сохраняемся")
+    @allure.step("Сохраняем изменения + скриншот")
     def save_change(self):
         self.wait.until(EC.element_to_be_clickable(self._SUBMIT_BUTTON)).click()
+        self.wait_for_loading_complete()
         allure.attach(
             self.driver.get_screenshot_as_png(),
             name="Personal deteals",
