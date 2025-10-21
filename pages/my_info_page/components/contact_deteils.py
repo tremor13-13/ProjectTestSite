@@ -34,5 +34,6 @@ class ContactDetails(BasePage):
         )
     @allure.step("Сохраняем изменения")
     def save_contact_details(self):
-        self.wait.until(EC.element_to_be_clickable(self._SUBMIT_BUTTON))
+        self.wait.until(EC.element_to_be_clickable(self._SUBMIT_BUTTON)).click()
+        self.wait.until(EC.visibility_of_element_located(self._SUBMIT_BUTTON))
 
