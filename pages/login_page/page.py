@@ -16,6 +16,8 @@ class LoginPage(BasePage):
     _PASSWORD_FIELD = "//input[@name='password']"
     _SUBMIT_BUTTON = "//button[@type='submit']"
 
+    @pytest.mark.regression
+    @pytest.mark.smoke
     @allure.step("Авторизация на сайте")
     def login(self, login, password):
         user_name = self.wait.until(EC.element_to_be_clickable(self._USERNAME_FIELD))

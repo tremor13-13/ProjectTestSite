@@ -14,6 +14,7 @@ class ContactDetails(BasePage):
     _ADDRESS_FIELD = "(//input[contains(@class, 'oxd-input')])[2]"
     _SUBMIT_BUTTON = "//button[@type='submit']"
 
+    @pytest.mark.smoke
     @pytest.mark.regression
     @allure.step("Переход на компонет Детали контакта")
     def cklic_contact_details(self):
