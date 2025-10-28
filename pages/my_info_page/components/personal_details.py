@@ -20,16 +20,18 @@ class PersonalDetailsComponent(BasePage):
         first_name_field = self.wait.until(EC.element_to_be_clickable(self._FIRST_NAME_FIELD))
         current_value = first_name_field.get_attribute("value")
         first_name_field.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
+        self.wait.until(EC.element_to_be_clickable(self._FIRST_NAME_FIELD))
         first_name_field.send_keys(first_name)
-
         assert current_value != first_name_field.get_attribute("value"), "Name was not 'chenged'"
 
 
     @allure.step("Изменяем 'отчество' Middle Name")
     def change_middle_name(self, middle_name):
         middle_name_field = self.wait.until(EC.element_to_be_clickable(self._MIDDLE_NAME_FIELD))
+        current_value = middle_name_field.get_attribute("value")
         middle_name_field.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
         middle_name_field.send_keys(middle_name)
+        assert current_value != middle_name_field.get_attribute("value"), "Name was not chenged"
         time.sleep(4)
 
 
