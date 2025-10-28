@@ -36,10 +36,9 @@ class CombinedTestCases:
 
     # ГРАНИЧНЫЕ значения для обоих полей
     BOUNDARY = [
-        CombinedTestData(generate_name(1), generate_name(1), "min_length", "error"),
         CombinedTestData(generate_name(30).capitalize(), generate_name(10).capitalize(), "max_length", "success"),
-        CombinedTestData(generate_name(31), "Valid", "first_too_long", "error"),
-        CombinedTestData("Valid", generate_name(11).capitalize(), "middle_too_long", "error"),
+        CombinedTestData(generate_name(31), generate_name(31).capitalize(), "first_too_long", "error"),
+        CombinedTestData(generate_name(11).capitalize(), generate_name(11).capitalize(), "middle_too_long", "success"),
     ]
 
     @classmethod

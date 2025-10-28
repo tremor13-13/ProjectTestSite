@@ -4,6 +4,7 @@ import allure
 
 from base.base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver import Keys
 
 
@@ -20,7 +21,10 @@ class PersonalDetailsComponent(BasePage):
         first_name_field = self.wait.until(EC.element_to_be_clickable(self._FIRST_NAME_FIELD))
         current_value = first_name_field.get_attribute("value")
         first_name_field.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
-        self.wait.until(EC.element_to_be_clickable(self._FIRST_NAME_FIELD))
+        WebDriverWait(self.driver, 5).until(
+            lambda d: first_name_field.get_attribute("value") == "",
+            message="Middle name field not cleared"
+        )
         first_name_field.send_keys(first_name)
         assert current_value != first_name_field.get_attribute("value"), "Name was not 'chenged'"
 
@@ -30,6 +34,10 @@ class PersonalDetailsComponent(BasePage):
         middle_name_field = self.wait.until(EC.element_to_be_clickable(self._MIDDLE_NAME_FIELD))
         current_value = middle_name_field.get_attribute("value")
         middle_name_field.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
+        WebDriverWait(self.driver, 5).until(
+            lambda d: middle_name_field.get_attribute("value") == "",
+            message="Middle name field not cleared"
+        )
         middle_name_field.send_keys(middle_name)
         assert current_value != middle_name_field.get_attribute("value"), "Name was not chenged"
         time.sleep(4)
