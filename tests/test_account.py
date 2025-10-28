@@ -65,7 +65,8 @@ class TestAccount(BaseTest):
             # Если ожидаем успех - проверяем что нет ошибок
             print("✓ Ожидался успех - проверяем что сохранение прошло")
 
-        else:  # expected_result == "error"
+        else:
+            test_data.expected_result == "error"
             # Если ожидаем ошибку - проверяем что есть ошибка или кнопка неактивна
             pytest.fail(
                 f"Ожидалась ошибка для комбинации: First='{test_data.first_name}', Middle='{test_data.middle_name}'")
