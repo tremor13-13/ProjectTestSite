@@ -59,6 +59,7 @@ class TestAccount(BaseTest):
             # Сохраняем
             self.myinfopage.personal_details.save_change()
             time.sleep(5)
+
     #
     #     # ПРОВЕРКА
     #     if test_data.expected_result == "success":
