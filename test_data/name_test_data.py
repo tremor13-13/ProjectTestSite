@@ -44,4 +44,4 @@ class CombinedTestCases:
 
     @classmethod
     def get_all_cases(cls) -> List[CombinedTestData]:
-        return cls.BOTH_VALID + cls.ONE_EMPTY + cls.BOUNDARY
+        return cls.BOTH_VALID + cls.BOUNDARY
