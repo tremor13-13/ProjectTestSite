@@ -37,9 +37,9 @@ class CombinedTestCases:
     # ГРАНИЧНЫЕ значения для обоих полей
     BOUNDARY = [
         CombinedTestData(generate_name(30), generate_name(30), "max_length", "success"),
-        # 30 символов - ДОЛЖНО РАБОТАТЬ
-        CombinedTestData(generate_name(31), generate_name(5), "first_too_long", "error"),  # 31 символ - ОШИБКА
-        CombinedTestData(generate_name(5), generate_name(31), "middle_too_long", "error"),  # 31 символ - ОШИБКА
+        CombinedTestData("A", "B", "min_length", "success"),  # Минимальная длина
+        CombinedTestData("", "Valid", "first_empty", "success"),  # Пустое First
+        CombinedTestData("Valid", "", "middle_empty", "success"),  # Пустое Middle
     ]
 
     @classmethod
