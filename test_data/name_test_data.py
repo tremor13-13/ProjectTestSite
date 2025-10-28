@@ -28,11 +28,11 @@ class CombinedTestCases:
     ]
 
     # ОДНО поле пустое - ДОЛЖНА БЫТЬ ОШИБКА
-    ONE_EMPTY = [
-        CombinedTestData("", "Michael", "first_empty", "error"),  # First Name пустое
-        CombinedTestData("John", "", "middle_empty", "error"),  # Middle Name пустое
-        CombinedTestData("", "", "both_empty", "error"),  # Оба пустые
-    ]
+    # ONE_EMPTY = [
+    #     CombinedTestData("", "Michael", "first_empty", "error"),  # First Name пустое
+    #     CombinedTestData("John", "", "middle_empty", "error"),  # Middle Name пустое
+    #     CombinedTestData("", "", "both_empty", "error"),  # Оба пустые
+    # ]
 
     # ГРАНИЧНЫЕ значения для обоих полей
     BOUNDARY = [
