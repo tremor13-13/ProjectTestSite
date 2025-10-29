@@ -38,7 +38,7 @@ class CombinedTestCases:
     BOUNDARY = [
         CombinedTestData(generate_name(30), generate_name(30), "max_length", "success"),
         CombinedTestData("A", "B", "min_length", "success"),  # Минимальная длина
-        CombinedTestData("", "Valid", "first_empty", "success"),  # Пустое First
+        CombinedTestData("", "Valid", "first_empty", "error"),  # Пустое First
         CombinedTestData("Valid", "", "middle_empty", "success"),  # Пустое Middle
     ]
 

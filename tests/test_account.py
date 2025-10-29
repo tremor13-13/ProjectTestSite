@@ -22,7 +22,7 @@ class TestAccount(BaseTest):
         self.dashboard_page.is_opened()
         self.dashboard_page.go_to_my_info_page()
         time.sleep(3)
-        self.myinfopage.personal_details.change_first_last_name(faker.last_name())
+        self.myinfopage.personal_details.change_first_last_name(faker.first_name())
         self.myinfopage.personal_details.change_middle_name(faker.last_name())
         time.sleep(5)
         self.myinfopage.personal_details.save_change()
@@ -63,39 +63,16 @@ class TestAccount(BaseTest):
         # ПРОВЕРКА
         if test_data.expected_result == "success":
             # Если ожидаем успех - проверяем что нет ошибок
-            print("✓ Ожидался успех - проверяем что сохранение прошло")
+            assert not self.myinfopage.personal_details.error_first_name()
+            assert not self.myinfopage.personal_details.error_big_name()
+            print(f"Тест прошел как и ожидалось first = '{test_data.first_name}'- Middle = '{test_data.middle_name}'")
 
         else:
-            test_data.expected_result == "error"
-            # Если ожидаем ошибку - проверяем что есть ошибка или кнопка неактивна
-            pytest.fail(
-                f"Ожидалась ошибка для комбинации: First='{test_data.first_name}', Middle='{test_data.middle_name}'")
+            error_first_name = self.myinfopage.personal_details.error_first_name()
+            error_big_name = self.myinfopage.personal_details.error_big_name()
+            if error_first_name or error_big_name:
+                print( f"Ожидаемая ошибка для комбинации: First='{test_data.first_name}', Middle='{test_data.middle_name}'")
+            else:
+                pytest.fail(
+                     f"Ошибка не ожидалась для комбинации: First='{test_data.first_name}', Middle='{test_data.middle_name}'")
 
-   # # НОВЫЙ параметризованный тест - ДОБАВЛЯЕМ ЭТОТ МЕТОД
-   #  @pytest.mark.parametrize("test_data", NameTestCases.get_all_cases(),
-   #                           ids=lambda x: f"{x.test_type}_{x.name[:10]}")
-   #  def test_name_validation(self, test_data):
-   #      """
-   #      Тестируем валидацию имен с разными граничными значениями
-   #      """
-   #      # Подготовка
-   #      self.login_page.open()
-   #      self.login_page.login(
-   #          login=self.credentials.LOGIN,
-   #          password=self.credentials.PASSWORD
-   #      )
-   #      self.dashboard_page.is_opened()
-   #      self.dashboard_page.go_to_my_info_page()
-   #      time.sleep(2)
-   #
-   #      # Действие
-   #      with allure.step(f"Тестируем имя: '{test_data.name}'"):
-   #          # Вводим тестовое имя
-   #          self.myinfopage.personal_details.change_first_last_name(test_data.name)
-   #          self.myinfopage.personal_details.save_change()
-   #          time.sleep(2)
-   #
-   #      # Упрощенная проверка - если expected_result = "success",
-   #      # считаем что тест прошел, иначе падаем
-   #      if test_data.expected_result == "error":
-   #          pytest.fail(f"Ожидалась ошибка для имени: {test_data.name}")

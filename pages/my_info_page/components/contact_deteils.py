@@ -14,6 +14,9 @@ class ContactDetails(BasePage):
     _ADDRESS_FIELD = "(//input[contains(@class, 'oxd-input')])[2]"
     _SUBMIT_BUTTON = "//button[@type='submit']"
 
+
+
+
     @pytest.mark.smoke
     @pytest.mark.regression
     @allure.step("Переход на компонет Детали контакта")
@@ -38,4 +41,6 @@ class ContactDetails(BasePage):
             name="Contact deteals add adress",
             attachment_type=allure.attachment_type.PNG
         )
+
+
 

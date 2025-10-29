@@ -14,6 +14,8 @@ class PersonalDetailsComponent(BasePage):
     _FIRST_NAME_FIELD = "//input[@name= 'firstName']"
     _MIDDLE_NAME_FIELD = "//input[@name= 'middleName']"
     _SUBMIT_BUTTON = "(//button[@type= 'submit'])[1]"
+    _FIRSR_NAME_ERROR_EMPTY = "//span[text()='Required']"
+    _NAME_ERROR_BIG_NAME = "//span[text()='Should not exceed 30 characters']"
 
 
     @allure.step("Изменяем имя пользователя")
@@ -35,7 +37,7 @@ class PersonalDetailsComponent(BasePage):
         current_value = middle_name_field.get_attribute("value")
         middle_name_field.send_keys(Keys.CONTROL + "A", Keys.BACKSPACE)
         WebDriverWait(self.driver, 5).until(
-            lambda d: middle_name_field.get_attribute("value") == "",
+            lambda a: middle_name_field.get_attribute("value") == "",
             message="Middle name field not cleared"
         )
         middle_name_field.send_keys(middle_name)
@@ -52,3 +54,19 @@ class PersonalDetailsComponent(BasePage):
             name="Personal deteals",
             attachment_type=allure.attachment_type.PNG
         )
+
+    def error_first_name(self):
+        """Проверка ошибки при пустом поле First Name"""
+        try:
+            error = self.wait.until(EC.presence_of_element_located(self._FIRSR_NAME_ERROR_EMPTY))
+            return error.text
+        except:
+            return None
+
+    def error_big_name(self):
+        """Проверка на длину введенного текста в поле"""
+        try:
+            error = self.wait.until(EC.presence_of_element_located(self._NAME_ERROR_BIG_NAME))
+            return error.text
+        except:
+            return None
