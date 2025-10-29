@@ -55,7 +55,7 @@ class TestAccount(BaseTest):
             self.myinfopage.personal_details.change_middle_name(test_data.middle_name)
             # Сохраняем
             self.myinfopage.personal_details.save_change()
-            time.sleep(5)
+            time.sleep(6)
 
         # ПРОВЕРКА
         if test_data.expected_result == "success":
