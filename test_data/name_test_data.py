@@ -27,16 +27,10 @@ class CombinedTestCases:
         CombinedTestData("Anna-Maria", "Van Der Berg", "both_valid_complex", "success"),
     ]
 
-    # ОДНО поле пустое - ДОЛЖНА БЫТЬ ОШИБКА
-    # ONE_EMPTY = [
-    #     CombinedTestData("", "Michael", "first_empty", "error"),  # First Name пустое
-    #     CombinedTestData("John", "", "middle_empty", "error"),  # Middle Name пустое
-    #     CombinedTestData("", "", "both_empty", "error"),  # Оба пустые
-    # ]
-
     # ГРАНИЧНЫЕ значения для обоих полей
     BOUNDARY = [
         CombinedTestData(generate_name(30), generate_name(30), "max_length", "success"),
+        CombinedTestData(generate_name(31), generate_name(31), "max_length", "error"),
         CombinedTestData("A", "B", "min_length", "success"),  # Минимальная длина
         CombinedTestData("", "Valid", "first_empty", "error"),  # Пустое First
         CombinedTestData("Valid", "", "middle_empty", "success"),  # Пустое Middle

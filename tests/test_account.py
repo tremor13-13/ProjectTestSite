@@ -7,8 +7,6 @@ from test_data.name_test_data import CombinedTestCases
 
 faker = Faker()
 
-
-
 class TestAccount(BaseTest):
 
     @pytest.mark.smoke
@@ -30,6 +28,7 @@ class TestAccount(BaseTest):
         self.myinfopage.contact_details.cklic_contact_details()
         self.myinfopage.contact_details.contact_deteals_adress_add(faker.address())
         self.myinfopage.contact_details.save_contact_details()
+        self.myinfopage.take_screenshot("Save my info page complited")
         time.sleep(5)
 
     # Параметризованные тесты (Тест дизайн + предугадывание ошибок)
