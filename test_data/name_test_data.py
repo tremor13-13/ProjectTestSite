@@ -6,7 +6,7 @@ import random
 import string
 faker = Faker()
 
-
+                                              
 @dataclass
 class CombinedTestData:
     first_name: str  # для поля First Name

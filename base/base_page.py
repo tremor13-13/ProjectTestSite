@@ -20,7 +20,7 @@ class BasePage(metaclass=MetaLocator):
         with allure.step(f'Open {self._PAGE_URL} page'):
             self.driver.get(self._PAGE_URL)
 
-    @allure.step("Проверка то что мы на той странице")
+    @allure.step("Проверка, что мы на той странице")
     def is_opened(self):
         self.wait.until(EC.url_to_be(self._PAGE_URL))
 
@@ -29,7 +29,7 @@ class BasePage(metaclass=MetaLocator):
 
     @allure.step("Screenshot page")
     def take_screenshot(self, name):
-        """Делает скриншот и добавляет в Allure"""
+        """Создание скриншота и добавление в Allure"""
         allure.attach(
             self.driver.get_screenshot_as_png(),
             name=name,
@@ -38,13 +38,13 @@ class BasePage(metaclass=MetaLocator):
         print(f"📸 Скриншот: {name}")
 
     def wait_for_loading_complete(self, timeout=15):
-        """Ждет полной загрузки страницы включая AJAX"""
+        """Ожидание полной загрузки страницы включая AJAX"""
         # Ждем готовность DOM
         WebDriverWait(self.driver, timeout).until(
             lambda driver: driver.execute_script("return document.readyState") == "complete"
         )
 
-        # Ждем исчезновение лоадеров
+        # Ждем исчезновение лодеров
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located(("class name", "oxd-form-loader"))
         )
